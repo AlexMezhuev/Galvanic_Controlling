@@ -8,8 +8,8 @@ Unit GCInter;
     MaxRobots=2;
     CRLF=#10+#13;
     SA: array [0..3] of record Name: string[8]; Y: byte; end=
-          ((Name:'';Y:19),        (Name:'“η αβª¨';Y:21),
-           (Name:' „¥β «¨';Y:19), (Name:' ®΅®βλ';Y:20));
+          ((Name:'';Y:19),        (Name:'β€Γ§Β Γ΅ΓΆΒªΒ¨';Y:21),
+           (Name:' β€Β¥ΓΆΒ Β«Β¨';Y:19), (Name:' ΒΒ®Β΅Β®ΓΆΓ«';Y:20));
   Type
     byteset=set of byte;
     SectionStateType=(free, taken);
