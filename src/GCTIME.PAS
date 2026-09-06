@@ -20,8 +20,8 @@ Unit GCTime;
         begin
         DT1:=0;
         If AutoTimeRegime then TimeScale:=0;
-        ReadReal('Œ áèâ ¡: ', 5, 64, 6, $1F, $1F, 1, -1, 1000/DelayTimeMin, Escaped, TimeScale);
-        ReadReal('‡ ¤¥à¦ª : ', 6, 64, 6, $1F, $1F, 2, 0, 100, Escaped, DT1);
+        ReadReal('Å’Â Ã¡Ã¨Ã¢Â Â¡: ', 5, 64, 6, $1F, $1F, 1, -1, 1000/DelayTimeMin, Escaped, TimeScale);
+        ReadReal('â€¡Â Â¤Â¥Ã Â¦ÂªÂ : ', 6, 64, 6, $1F, $1F, 2, 0, 100, Escaped, DT1);
         If TimeScale=0 then DelayTime:=DelayTimeMin
                        else DelayTime:=Round(1000/TimeScale);
         inc(DelayTime, Round(DT1*1000));
