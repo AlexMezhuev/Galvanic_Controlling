@@ -1,6 +1,6 @@
-(* ���ࠡ�⪠ �����⬮� �ࠢ����� �࠭ᯮ�⭮� ��⥬�� ��� ����- *)
-(* ���������⨩ � �ᯮ�짮������  ��⮤�� ���樮����� �ࠢ�����. *)
-(* ��ࠢ����� ���ப���஫��஬                                     *)
+(*  §à ¡®âª   «£®à¨â¬®¢ ã¯à ¢«¥­¨ï âà ­á¯®àâ­®© á¨áâ¥¬®© ’Š £ «ì- *)
+(* ¢ ­®¯®ªàëâ¨© á ¨á¯®«ì§®¢ ­¨¥¬  ¬¥â®¤®¢ á¨âã æ¨®­­®£® ã¯à ¢«¥­¨ï. *)
+(* “¯à ¢«¥­¨¥ ¬¨ªà®ª®­âà®««¥à®¬                                     *)
 Program MicroController;
   Uses TPCRT, TPDate, TPDOS, TPString, GCInter, GCProg;
   Type
@@ -19,7 +19,7 @@ Program MicroController;
       Repeat until (Mem[$0000:$0400]=B) OR (TimeMs-T0>5);
       If Mem[$0000:$0400]<>B then
         begin
-        FastWrite ('�訡�� ��।�� ������', WhereX, WhereY, $1E); Halt;
+        FastWrite ('Žè¨¡ª  ¯¥à¥¤ ç¨ ¤ ­­ëå', WhereX, WhereY, $1E); Halt;
         end;
     end;
 
@@ -41,16 +41,16 @@ Program MicroController;
       i: byte;
       s: string;
     begin
-{-------------------- ��ࢮ��砫쭠� ��ࠡ�⪠ ��࠭� -----------------------}
-      WriteLn ('��ᯨᠭ�� ࠡ��� �࠭ᯮ�⭮� ��⥬� ��� ���좠�������⨩',
-               CRLF, '��ࠢ����� ���ப���஫��஬',
-               CRLF, '���㥢 �., ����, ����, 1992,94');
+{-------------------- ¥à¢®­ ç «ì­ ï ®¡à ¡®âª  íªà ­  -----------------------}
+      WriteLn (' á¯¨á ­¨¥ à ¡®âë âà ­á¯®àâ­®© á¨áâ¥¬ë ’Š £ «ì¢ ­®¯®ªàëâ¨©',
+               CRLF, '“¯à ¢«¥­¨¥ ¬¨ªà®ª®­âà®««¥à®¬',
+               CRLF, 'Œ¥¦ã¥¢ €., ‘€, ’ƒ’“, 1992,94');
       SaveWindow(1,1,80,25,TRUE,StartScreen); StartColor:=TextAttr;
-{---------------------- ���� ����� 䠩�� �ᯨᠭ�� ------------------------}
+{---------------------- ‚¢®¤ ­®¬¥à  ä ©«  à á¯¨á ­¨ï ------------------------}
       Process:='2';
       If ParamCount<>0 then Process:=ParamStr(1);
-    {     Write ('����� 䠩�� �ᯨᠭ��? '); ReadLn (Process);}
-{-------------------- ���樠������ ���ﭨ� ஡�⮢ ----------------------}
+    {     Write ('®¬¥à ä ©«  à á¯¨á ­¨ï? '); ReadLn (Process);}
+{-------------------- ˆ­¨æ¨ «¨§ æ¨ï á®áâ®ï­¨© à®¡®â®¢ ----------------------}
       For i:=1 to NumberOfRobots do
         with R[i] do
           begin
@@ -59,7 +59,7 @@ Program MicroController;
           RestStopVertTravelTime:=0;
           end;
 r[1].horcoord:=1; r[2].horcoord:=13;
-{--------------------- ���樠������ ���ப���஫��� -----------------------}
+{--------------------- ˆ­¨æ¨ «¨§ æ¨ï ¬¨ªà®ª®­âà®««¥à  -----------------------}
       SendByte($4A);
       SendByte($01);
       SendByte(0); SendByte(0);
@@ -80,13 +80,13 @@ r[1].horcoord:=1; r[2].horcoord:=13;
         Finish:=(Pos(':', S)<>0) OR (Trim(S)='');
          If Not Finish then
           begin
-          If Pos('��⮮�����', S)<>0 then
+          If Pos(' ¢â®®¯¥à â®à', S)<>0 then
             begin
             If NR<>0 then NewEl[NR]:=Left[NR];
             inc(NR);
             ReadLn (f, S);
-            If Pos('�ॢ�襭��', S)<>0 then Exit;
-            If Pos('�訡��', S)<>0 then Halt;
+            If Pos('à¥¢ëè¥­¨ï', S)<>0 then Exit;
+            If Pos('Žè¨¡ª ', S)<>0 then Halt;
             NewEl[NR]:=Left[NR];
             end;
           New(NewEl[NR]); Right[NR]^.Next:=NewEl[NR];
