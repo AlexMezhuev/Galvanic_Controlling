@@ -53,7 +53,7 @@ Unit GCCtrl;
               Oper:=Op[i,1];
               Start:=Time; ReglBreach[Cycle-D[i].C]:=0;
               inc(P[Oper.Pos].Fillness); P[Oper.Pos].ContDet:=i;
-                {disadvantage - P[Oper.Pos].Valueð1}
+                {disadvantage - P[Oper.Pos].ValueÃ°1}
               j:=0; Repeat inc(j) until Charge[j].Det=i;
               Charge[j].Start:=Start;
               If (i=NumberOfDetails) AND (Charge[1].MinTimeFromPrevious<>0) then
@@ -89,7 +89,7 @@ Unit GCCtrl;
                 begin
                 UnloadResult:=TRUE;
                 Dec(P[Oper.Pos].Fillness); P[Oper.Pos].ContDet:=0;
-                   {Disadvantage - P[Oper.Pos].Valueð1}
+                   {Disadvantage - P[Oper.Pos].ValueÃ°1}
                 inc (Stage); Start:=Time;
                 Oper.Pos:=0; Oper.MinDuration:=0; Stage:=0; 
                 inc (C);
@@ -111,15 +111,15 @@ Unit GCCtrl;
     begin                    { Unobjective method }
 {exit;}
       If NumberOfRobots=1 then Exit;
-   { ¢ëç¨á«¥­¨¥ ¯®«®¦¥­¨© â¥áâ¨àã¥¬®£® à®¡®â  ¤® ¢ë¯®«­¥­¨ï è £  ¨ ¯®á«¥ }
+   { Â¢Ã«Ã§Â¨Ã¡Â«Â¥Â­Â¨Â¥ Â¯Â®Â«Â®Â¦Â¥Â­Â¨Â© Ã¢Â¥Ã¡Ã¢Â¨Ã Ã£Â¥Â¬Â®Â£Â® Ã Â®Â¡Â®Ã¢Â  Â¤Â® Â¢Ã«Â¯Â®Â«Â­Â¥Â­Â¨Ã¯ Ã¨Â Â£Â  Â¨ Â¯Â®Ã¡Â«Â¥ }
       II2:=0; CRi:=0; x1:=R[NR].HorCoord-TimeQuantum*RobotHorSpeed*R[NR].HorDir;
       If R[NR].HorCoord*R[NR].HorDir>=P[R[NR].DestP].Coord*R[NR].HorDir
         then x2:=P[R[NR].DestP].Coord else x2:=R[NR].HorCoord;
       If x1>x2 then begin x:=x1; x1:=x2; x2:=x; end;
       For i:=1 to NumberOfRobots do
         if i<>NR then
-{  ­ «¨§ áâ®«ª­®¢¥­¨ï, § ¯®¬¨­ ­¨¥ à®¡®â  ¨ ¢ëç¨á«¥­¨¥ áã¬¬ à­®£® ¨­¤¥ªá  ¢ ¦-
-­®áâ¥© à®¡®â®¢ }
+{ Â Â­Â Â«Â¨Â§ Ã¡Ã¢Â®Â«ÂªÂ­Â®Â¢Â¥Â­Â¨Ã¯, Â§Â Â¯Â®Â¬Â¨Â­Â Â­Â¨Â¥ Ã Â®Â¡Â®Ã¢Â  Â¨ Â¢Ã«Ã§Â¨Ã¡Â«Â¥Â­Â¨Â¥ Ã¡Ã£Â¬Â¬Â Ã Â­Â®Â£Â® Â¨Â­Â¤Â¥ÂªÃ¡Â  Â¢Â Â¦-
+Â­Â®Ã¡Ã¢Â¥Â© Ã Â®Â¡Â®Ã¢Â®Â¢ }
           if (R[i].HorCoord>=x1-RobotWidth) AND (R[i].HorCoord<=x2+RobotWidth) then
             begin
             inc(CRi); CollisedRobots[CRi]:=i;
@@ -127,7 +127,7 @@ Unit GCCtrl;
             end;
       If CRi=0 then Exit;
       If ord(Detail(CC[NR].Det, timeD))<=II2 then
-        begin                   { à®¡®â NR ¬¥­¥¥ ¢ ¦¥­ }
+        begin                   { Ã Â®Â¡Â®Ã¢ NR Â¬Â¥Â­Â¥Â¥ Â¢Â Â¦Â¥Â­ }
         Extr_HorCoord:=R[CollisedRobots[1]].HorCoord*R[NR].HorDir;
         For i:=2 to CRi do
           if R[CollisedRobots[i]].HorCoord*R[NR].HorDir<Extr_HorCoord then
@@ -139,21 +139,21 @@ TraceProgram(2, NR, 'K', Time-R[NR].SSTime, RobotCoordInPos(NR,x),D_tmp);
 R[NR].SSTime:=Time;
         end
                                          else
-        For i:=1 to CRi do { à®¡®â NR ¡®«¥¥ ¢ ¦¥­--®â¢®¤ïâáï ®áâ «ì­ë¥ à®¡®âë }
+        For i:=1 to CRi do { Ã Â®Â¡Â®Ã¢ NR Â¡Â®Â«Â¥Â¥ Â¢Â Â¦Â¥Â­--Â®Ã¢Â¢Â®Â¤Ã¯Ã¢Ã¡Ã¯ Â®Ã¡Ã¢Â Â«Ã¬Â­Ã«Â¥ Ã Â®Â¡Â®Ã¢Ã« }
           begin
           j:=CollisedRobots[i];
           x:=R[j].HorCoord;
           R[j].HorCoord:=
             R[j].HorCoord+TimeQuantum*RobotHorSpeed*R[NR].HorDir;
           If (R[j].HorCoord>=x1-RobotWidth) AND (R[j].HorCoord<=x2+RobotWidth) then
-            begin FastWrite('‘â®«ª­®¢¥­¨¥ à®¡®â®¢',1,1,$4E); {Halt;} end;
+            begin FastWrite('â€˜Ã¢Â®Â«ÂªÂ­Â®Â¢Â¥Â­Â¨Â¥ Ã Â®Â¡Â®Ã¢Â®Â¢',1,1,$4E); {Halt;} end;
 If Not R[i].Busy then D_tmp:=0;
 TraceProgram(2, i, 'K', Time-R[i].SSTime, RobotCoordInPos(i,x),D_tmp);
 R[i].SSTime:=Time;
           end;
     end;
-{ Ž¯à¥¤¥«¥­¨¥ áâ®«ª­®¢¥­¨ï à®¡®â®¢ ¨ ä®à¬¨à®¢ ­¨¥ ¯à¨ª §  ­  ¯¥à¥¬¥é¥­¨¥ à®¡®-
-â®¢ }
+{ Å½Â¯Ã Â¥Â¤Â¥Â«Â¥Â­Â¨Â¥ Ã¡Ã¢Â®Â«ÂªÂ­Â®Â¢Â¥Â­Â¨Ã¯ Ã Â®Â¡Â®Ã¢Â®Â¢ Â¨ Ã¤Â®Ã Â¬Â¨Ã Â®Â¢Â Â­Â¨Â¥ Â¯Ã Â¨ÂªÂ Â§Â  Â­Â  Â¯Â¥Ã Â¥Â¬Â¥Ã©Â¥Â­Â¨Â¥ Ã Â®Â¡Â®-
+Ã¢Â®Â¢ }
 
   Procedure RobotStep;
     var
