@@ -14,14 +14,14 @@ Unit GCProg;
     Procedure InitPrograms(Fun, NumberOfRobots: byte; C: char; DT: longint; B, D0: byte);
       var
         i: byte;
-      begin                    { инициализация списков }
+      begin                    { ┬и┬н┬и├ж┬и┬а┬л┬и┬з┬а├ж┬и├п ├б┬п┬и├б┬к┬о┬в }
         For i:=1 to NumberOfRobots do
           TraceProgram(1, i, C, DT, RobotCoordInPos(i,delta), D0);
         New(B_NewEl); B_NewEl^.Next:=NIL; B_Left:=B_NewEl; B_Right:=B_NewEl;
       end;
 
     Procedure AddCommand(Fun, NR: byte; C: char; DT: longint; B, D0: byte);
-      begin  { запись команды: первой (Fun=1) и всех остальных (Fun=2) }
+      begin  { ┬з┬а┬п┬и├б├м ┬к┬о┬м┬а┬н┬д├л: ┬п┬е├а┬в┬о┬й (Fun=1) ┬и ┬в├б┬е├е ┬о├б├в┬а┬л├м┬н├л├е (Fun=2) }
       {If (D[CC[NR].Det].C<=4) OR (C='k') OR (Fun=1) then begin}
         If (c='c') AND (DT=0) then Exit;
         New(NewEl[NR]); If Fun=2 then Right[NR]^.Next:=NewEl[NR];
@@ -38,7 +38,7 @@ Unit GCProg;
     Procedure AddBreach(Fun, NR: byte; C: char; DT: longint; B, D0: byte);
       begin
       If D[D0].C=1 then
-        begin               { запись в список нарушений }
+        begin               { ┬з┬а┬п┬и├б├м ┬в ├б┬п┬и├б┬о┬к ┬н┬а├а├г├и┬е┬н┬и┬й }
         New(B_NewEl); B_Right^.Next:=B_NewEl;
         With B_NewEl^ do
           begin
@@ -59,14 +59,14 @@ Unit GCProg;
         WasTaken: array [1..MaxRS] of boolean;
 
       Function RobotCycle(NR: byte; var Com1_prev, Com1: ProgramList; var Len: word): byte;
-        var               { оптимизация при учете длины расписания }
+        var               { ┬о┬п├в┬и┬м┬и┬з┬а├ж┬и├п ┬п├а┬и ├г├з┬е├в┬е ┬д┬л┬и┬н├л ├а┬а├б┬п┬и├б┬а┬н┬и├п }
           flag: boolean;
           i: byte;
           El2, El3, El4, El_tmp, SAd1: ProgramList;
-        begin {                     Поиск цикла у робота NR                  }
+        begin {                     ┬П┬о┬и├б┬к ├ж┬и┬к┬л┬а ├г ├а┬о┬б┬о├в┬а NR                  }
         El_tmp:=Left[NR]^.Next;
         Repeat
-          Com1_prev:=Com1; { удаление Com1 }
+          Com1_prev:=Com1; { ├г┬д┬а┬л┬е┬н┬и┬е Com1 }
           Com1:=El_tmp;
           El2:=Com1;
           flag:=FALSE;
@@ -94,19 +94,19 @@ Unit GCProg;
 
       begin
       If Charge[1].MinTimeFromPrevious<>0 then
-        with SAd[1] do   {               Поиск цикла у робота NR             }
+        with SAd[1] do   {               ┬П┬о┬и├б┬к ├ж┬и┬к┬л┬а ├г ├а┬о┬б┬о├в┬а NR             }
           begin
           Code:=RobotCycle(1, Com1_prev, Com1, Len);
           If Code=1 then
-            begin { цикл не найден } end
+            begin { ├ж┬и┬к┬л ┬н┬е ┬н┬а┬й┬д┬е┬н } end
                     else
-            begin {        II. Поиск захвата детали с позиции загрузки       }
+            begin {        II. ┬П┬о┬и├б┬к ┬з┬а├е┬в┬а├в┬а ┬д┬е├в┬а┬л┬и ├б ┬п┬о┬з┬и├ж┬и┬и ┬з┬а┬г├а├г┬з┬к┬и       }
             If Com1_prev^.Pos<>LoadPosition then
               begin
               While Com1^.Pos<>LoadPosition do Com1:=Com1^.Next;
               Com1:=Com1^.Next;
               end;
-{            III. Поиск циклов у остальных роботов и корректировка           }
+{            III. ┬П┬о┬и├б┬к ├ж┬и┬к┬л┬о┬в ├г ┬о├б├в┬а┬л├м┬н├л├е ├а┬о┬б┬о├в┬о┬в ┬и ┬к┬о├а├а┬е┬к├в┬и├а┬о┬в┬к┬а           }
             For NR:=2 to NumberOfRobots do
               with SAd[NR] do 
                 begin
@@ -132,7 +132,7 @@ Unit GCProg;
                     end;
                   end;
                 end;
-{               IV. Определение позиций начальных загрузок                   }
+{               IV. ┼╜┬п├а┬е┬д┬е┬л┬е┬н┬и┬е ┬п┬о┬з┬и├ж┬и┬й ┬н┬а├з┬а┬л├м┬н├л├е ┬з┬а┬г├а├г┬з┬о┬к                   }
 { Error may be occurs when analizing 12th (trans) position }
             StartCharge[1]:='T';
             For i:=1 to NumberOfPositions do WasTaken[i]:=FALSE;
@@ -160,7 +160,7 @@ Unit GCProg;
         i: byte;
       begin
       If Cycle =4 then
-        begin                     { запись списков в файл }
+        begin                     { ┬з┬а┬п┬и├б├м ├б┬п┬и├б┬к┬о┬в ┬в ├д┬а┬й┬л }
         ProcessShedule(4, NR, C, DT, B, D0);
         Assign (f, 'program'+Process+'.dat'); ReWrite(f); WriteLn (f, StartCharge);
         If Charge[1].MinTimeFromPrevious=0 then
@@ -169,7 +169,7 @@ Unit GCProg;
             begin
             TraceProgram(2, i, 'k', DT-R[i].SSTime, 255, 0);
             NewEl[i]:=Left[i]^.Next;
-            WriteLn (f, i:1, '-й автооператор');
+            WriteLn (f, i:1, '-┬й ┬а┬в├в┬о┬о┬п┬е├а┬а├в┬о├а');
             While NewEl[i]<>NIL do
               With NewEl[i]^ do
                 begin
@@ -182,12 +182,12 @@ writeLn(f,t1:6);
                 NewEl[i]:=NewEl[i]^.Next;
                 end;
             end;
-{             Write (f, 'Превышения регламента:', #10, 'общее: ', OFVT[Cycle-1]:1,
-                 #10, 'по деталям: ');
+{             Write (f, '┬П├а┬е┬в├л├и┬е┬н┬и├п ├а┬е┬г┬л┬а┬м┬е┬н├в┬а:', #10, '┬о┬б├й┬е┬е: ', OFVT[Cycle-1]:1,
+                 #10, '┬п┬о ┬д┬е├в┬а┬л├п┬м: ');
           For i:=1 to NumberOfDetails do Write (f, D[i].ReglBreach[Cycle-1]:1, ' ');
           If OFVT[Cycle-1]<>0 then
             begin
-            WriteLn (f, #10+'Деталь  Позиция      Превышение (сек, %)');
+            WriteLn (f, #10+'тАЮ┬е├в┬а┬л├м  ┬П┬о┬з┬и├ж┬и├п      ┬П├а┬е┬в├л├и┬е┬н┬и┬е (├б┬е┬к, %)');
             B_NewEl:=B_Left^.Next;
             While B_NewEl<>NIL do
               With B_NewEl^ do
@@ -196,14 +196,14 @@ writeLn(f,t1:6);
                 B_NewEl:=B_NewEl^.Next;
                 end;
             end;
-}             Write (f, #10, 'Продолжительность процесса: ', Time:1);
+}             Write (f, #10, '┬П├а┬о┬д┬о┬л┬ж┬и├в┬е┬л├м┬н┬о├б├в├м ┬п├а┬о├ж┬е├б├б┬а: ', Time:1);
           end
                                            else
           begin
           For NR:=1 to NumberOfRobots do
             with SAd[NR] do
               begin
-              WriteLn (f, NR:1, '-й автооператор');
+              WriteLn (f, NR:1, '-┬й ┬а┬в├в┬о┬о┬п┬е├а┬а├в┬о├а');
               Case Code of
                 0: For i:=1 to Len do with Com1^ do
                      begin
@@ -211,11 +211,11 @@ writeLn(f,t1:6);
                      If Detail<>0 then WriteLn (f, '1':3) else WriteLn (f);
                      Com1:=Com1^.Next;
                      end;
-                1: WriteLn (f, 'Ошибка: Цикл не обнаружен');
-                2: WriteLn (f, 'Ошибка: Синхронизация невозможна');
+                1: WriteLn (f, '┼╜├и┬и┬б┬к┬а: тАУ┬и┬к┬л ┬н┬е ┬о┬б┬н┬а├а├г┬ж┬е┬н');
+                2: WriteLn (f, '┼╜├и┬и┬б┬к┬а: тАШ┬и┬н├е├а┬о┬н┬и┬з┬а├ж┬и├п ┬н┬е┬в┬о┬з┬м┬о┬ж┬н┬а');
               end;
               end;
-          WriteLn (f, 'Длительность цикла: ', CycleDuration:1);
+          WriteLn (f, 'тАЮ┬л┬и├в┬е┬л├м┬н┬о├б├в├м ├ж┬и┬к┬л┬а: ', CycleDuration:1);
           end;
         Close(f);
       end;
@@ -229,6 +229,6 @@ writeLn(f,t1:6);
         255:WritePrograms(Fun, NR, C, DT, B, D0);
       end;
     end;
-{ Запись расписаний движений роботов }
+{ тАб┬а┬п┬и├б├м ├а┬а├б┬п┬и├б┬а┬н┬и┬й ┬д┬в┬и┬ж┬е┬н┬и┬й ├а┬о┬б┬о├в┬о┬в }
 
 begin end.
