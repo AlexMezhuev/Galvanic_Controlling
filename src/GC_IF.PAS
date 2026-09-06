@@ -15,18 +15,18 @@ Unit GC_IF; {Initial-Terminative Unit}
       i, j: integer;
       x, y: real;
     begin
-{-------------------- Первоначальная обработка экрана -----------------------}
-      WriteLn ('Расписание работы транспортной системы РТК гальванопокрытий',
-               CRLF, 'Расчет расписания',
-               CRLF, 'Межуев А., САПР, ТГТУ, 1992,94');
+{-------------------- ┬П┬е├а┬в┬о┬н┬а├з┬а┬л├м┬н┬а├п ┬о┬б├а┬а┬б┬о├в┬к┬а ├н┬к├а┬а┬н┬а -----------------------}
+      WriteLn ('┬Р┬а├б┬п┬и├б┬а┬н┬и┬е ├а┬а┬б┬о├в├л ├в├а┬а┬н├б┬п┬о├а├в┬н┬о┬й ├б┬и├б├в┬е┬м├л ┬РтАЩ┼а ┬г┬а┬л├м┬в┬а┬н┬о┬п┬о┬к├а├л├в┬и┬й',
+               CRLF, '┬Р┬а├б├з┬е├в ├а┬а├б┬п┬и├б┬а┬н┬и├п',
+               CRLF, '┼Т┬е┬ж├г┬е┬в тВм., тАШтВм┬П┬Р, тАЩ╞ТтАЩтАЬ, 1992,94');
       SaveWindow(1,1,80,25,TRUE,StartScreen); StartColor:=TextAttr;
       Process:='2';
       If ParamCount<>0 then Process:=ParamStr(1);
-{     Write ('Номер технологического процесса? '); ReadLn (Process);} 
+{     Write ('┬Н┬о┬м┬е├а ├в┬е├е┬н┬о┬л┬о┬г┬и├з┬е├б┬к┬о┬г┬о ┬п├а┬о├ж┬е├б├б┬а? '); ReadLn (Process);} 
       s:='shedule'+Process+'.dat';
       Assign (f_set, 'gcset.dat'); Reset (f_set);
       Read (f_set, i); Animation:=i=1;
-{-------------------------- Ввод данных об автооператорах -------------------}
+{-------------------------- тАЪ┬в┬о┬д ┬д┬а┬н┬н├л├е ┬о┬б ┬а┬в├в┬о┬о┬п┬е├а┬а├в┬о├а┬а├е -------------------}
       Assign (f, 'autoop.dat'); ReSet (f);
       ReadLn (f, NumberOfRobots); ReadLn (f, x); ReadLn (f, y);
       RobotHorSpeed:=x/60; RobotVertSpeed:=y/60;
@@ -53,7 +53,7 @@ Unit GC_IF; {Initial-Terminative Unit}
           end;
         end;
       Close (f);
-{-------------------- Ввод данных о технологических процесах ----------------}
+{-------------------- тАЪ┬в┬о┬д ┬д┬а┬н┬н├л├е ┬о ├в┬е├е┬н┬о┬л┬о┬г┬и├з┬е├б┬к┬и├е ┬п├а┬о├ж┬е├б┬а├е ----------------}
       Assign (f, 'process.dat'); ReSet (f);
       ReadLn(f, NumberOfSupportOp);
       For i:=1 to NumberOfSupportOp do with SupportOp[i] do
@@ -63,7 +63,7 @@ Unit GC_IF; {Initial-Terminative Unit}
       StartCharge:=CharStr('F', NumberOfSupportOp);
       Close (f);
       Assign (f, 'vanna.dat'); ReSet (f);
-{--------------------------- Ввод данных о позициях --------------------------}
+{--------------------------- тАЪ┬в┬о┬д ┬д┬а┬н┬н├л├е ┬о ┬п┬о┬з┬и├ж┬и├п├е --------------------------}
       ReadLn (f, NumberOfPositions); ReadLn (f);
       P[1].Coord:=0;
       For i:=2 to NumberOfPositions do
@@ -86,7 +86,7 @@ Unit GC_IF; {Initial-Terminative Unit}
         ReadLn (f, j); inc (P[j].Value);
         end;
       Close (f);
-{----------------- Ввод данных о регламенте обработки деталей ---------------}
+{----------------- тАЪ┬в┬о┬д ┬д┬а┬н┬н├л├е ┬о ├а┬е┬г┬л┬а┬м┬е┬н├в┬е ┬о┬б├а┬а┬б┬о├в┬к┬и ┬д┬е├в┬а┬л┬е┬й ---------------}
       Assign (f, s); ReSet (f);
       j:=0;
       Repeat
@@ -120,11 +120,11 @@ Unit GC_IF; {Initial-Terminative Unit}
           end;
       Charge[0]:=Charge[NumberOfDetails];
       Close(f);
-{----------------------------- Чтение настройки -----------------------------}
+{----------------------------- тАФ├в┬е┬н┬и┬е ┬н┬а├б├в├а┬о┬й┬к┬и -----------------------------}
       Read (f_set, State, i, TimeScale, DelayTime, DelayTimeMin);
       AutoTimeRegime:=i=1;
       Close(f_set);
-{                        Инициализация состояний объектов                    }
+{                        ╦Ж┬н┬и├ж┬и┬а┬л┬и┬з┬а├ж┬и├п ├б┬о├б├в┬о├п┬н┬и┬й ┬о┬б├к┬е┬к├в┬о┬в                    }
       OFVT[0]:=0; T0:=0; P0:=1;
       For i:=1 to MaxRS do begin P[i].Fillness:=0; P[i].ContDet:=0; end;
       Time:=0; TimeInc:=0; Cycle:=1;
@@ -145,7 +145,7 @@ r[1].horcoord:=p[1].coord; r[2].horcoord:=p[13].coord;
       TraceProgram(0, 0, ' ', 0, 0, 0);
       CalcTimeParm[1]:=TimeMs; CalcTimeParm[3]:=0;
     end;
-{ Загрузка операций для каждой детали; инициализация состояний объектов }
+{ тАб┬а┬г├а├г┬з┬к┬а ┬о┬п┬е├а┬а├ж┬и┬й ┬д┬л├п ┬к┬а┬ж┬д┬о┬й ┬д┬е├в┬а┬л┬и; ┬и┬н┬и├ж┬и┬а┬л┬и┬з┬а├ж┬и├п ├б┬о├б├в┬о├п┬н┬и┬й ┬о┬б├к┬е┬к├в┬о┬в }
 
   Procedure Terminate (key: char);
     begin
