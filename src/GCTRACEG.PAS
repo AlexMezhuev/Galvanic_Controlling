@@ -1,7 +1,7 @@
-(* Разработка алгоритмов управления транспортной системой РТК галь- *)
-(* ванопокрытий с использованием  методов ситуационного управления. *)
-(* Графическое иллюстрирование работы РТК                           *)
-(* Ляшков А., Васильев С.А., Межуев А.                              *)
+(* ╨а╨░╨╖╤А╨░╨▒╨╛╤В╨║╨░ ╨░╨╗╨│╨╛╤А╨╕╤В╨╝╨╛╨▓ ╤Г╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤П ╤В╤А╨░╨╜╤Б╨┐╨╛╤А╤В╨╜╨╛╨╣ ╤Б╨╕╤Б╤В╨╡╨╝╨╛╨╣ ╨а╨в╨Ъ ╨│╨░╨╗╤М- *)
+(* ╨▓╨░╨╜╨╛╨┐╨╛╨║╤А╤Л╤В╨╕╨╣ ╤Б ╨╕╤Б╨┐╨╛╨╗╤М╨╖╨╛╨▓╨░╨╜╨╕╨╡╨╝  ╨╝╨╡╤В╨╛╨┤╨╛╨▓ ╤Б╨╕╤В╤Г╨░╤Ж╨╕╨╛╨╜╨╜╨╛╨│╨╛ ╤Г╨┐╤А╨░╨▓╨╗╨╡╨╜╨╕╤П. *)
+(* ╨У╤А╨░╤Д╨╕╤З╨╡╤Б╨║╨╛╨╡ ╨╕╨╗╨╗╤О╤Б╤В╤А╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡ ╤А╨░╨▒╨╛╤В╤Л ╨а╨в╨Ъ                           *)
+(* ╨Ы╤П╤И╨║╨╛╨▓ ╨Р., ╨Т╨░╤Б╨╕╨╗╤М╨╡╨▓ ╨б.╨Р., ╨Ь╨╡╨╢╤Г╨╡╨▓ ╨Р.                              *)
 
 {$X+,R+}
 Unit GCTrace;
@@ -13,18 +13,18 @@ interface
 
 type
   RobotImageType=record
-    Xr: longint;                          { текущая Х-координата робота в мм }
-    X: word;                          { текущая Х-координата робота в точках }
-    Y: byte;                          { текущая У-координата робота в точках }
-{   Tk: longint;                    время конца выполнения команды в 0.1 сек }
-    Yi: byte;               { количество 0.1 сек движений вверх-вниз, не от- }
-                            { ражённых ещё на экране  из-за малого  масштаба }
-    ReflectedEl: byte;                         { отображаемый элемент работы }
-    Corrected: boolean;  { производилась ли коррекция после гор. перемещения }
+    Xr: longint;                          { ├в┬е┬к├г├й┬а├п тАв-┬к┬о┬о├а┬д┬и┬н┬а├в┬а ├а┬о┬б┬о├в┬а ┬в ┬м┬м }
+    X: word;                          { ├в┬е┬к├г├й┬а├п тАв-┬к┬о┬о├а┬д┬и┬н┬а├в┬а ├а┬о┬б┬о├в┬а ┬в ├в┬о├з┬к┬а├е }
+    Y: byte;                          { ├в┬е┬к├г├й┬а├п тАЬ-┬к┬о┬о├а┬д┬и┬н┬а├в┬а ├а┬о┬б┬о├в┬а ┬в ├в┬о├з┬к┬а├е }
+{   Tk: longint;                    ┬в├а┬е┬м├п ┬к┬о┬н├ж┬а ┬в├л┬п┬о┬л┬н┬е┬н┬и├п ┬к┬о┬м┬а┬н┬д├л ┬в 0.1 ├б┬е┬к }
+    Yi: byte;               { ┬к┬о┬л┬и├з┬е├б├в┬в┬о 0.1 ├б┬е┬к ┬д┬в┬и┬ж┬е┬н┬и┬й ┬в┬в┬е├а├е-┬в┬н┬и┬з, ┬н┬е ┬о├в- }
+                            { ├а┬а┬ж├▒┬н┬н├л├е ┬е├й├▒ ┬н┬а ├н┬к├а┬а┬н┬е  ┬и┬з-┬з┬а ┬м┬а┬л┬о┬г┬о  ┬м┬а├б├и├в┬а┬б┬а }
+    ReflectedEl: byte;                         { ┬о├в┬о┬б├а┬а┬ж┬а┬е┬м├л┬й ├н┬л┬е┬м┬е┬н├в ├а┬а┬б┬о├в├л }
+    Corrected: boolean;  { ┬п├а┬о┬и┬з┬в┬о┬д┬и┬л┬а├б├м ┬л┬и ┬к┬о├а├а┬е┬к├ж┬и├п ┬п┬о├б┬л┬е ┬г┬о├а. ┬п┬е├а┬е┬м┬е├й┬е┬н┬и├п }
   end;
   PositionImageType=record
-    Yt: byte;                                       { текущая высота столбца }
-    U1: boolean;                                 { есть ли столбик индикации }
+    Yt: byte;                                       { ├в┬е┬к├г├й┬а├п ┬в├л├б┬о├в┬а ├б├в┬о┬л┬б├ж┬а }
+    U1: boolean;                                 { ┬е├б├в├м ┬л┬и ├б├в┬о┬л┬б┬и┬к ┬и┬н┬д┬и┬к┬а├ж┬и┬и }
     NumberOfOp: byte;
   end;
 var
@@ -38,11 +38,11 @@ var
   GraphicDriver, GraphicMode: integer;
   T: real;
   D_tmp, NR, P_tmp: byte;
-  Temp: byte;                          { масштаб скорости движения по экрану }
+  Temp: byte;                          { ┬м┬а├б├и├в┬а┬б ├б┬к┬о├а┬о├б├в┬и ┬д┬в┬и┬ж┬е┬н┬и├п ┬п┬о ├н┬к├а┬а┬н├г }
   RR, RR1: word;
   St: string;
-  YP: word;                                 { высота подъёма детали в точках }
-  Smoothness: real;                      { коэффициент плавности перемещения }
+  YP: word;                                 { ┬в├л├б┬о├в┬а ┬п┬о┬д├к├▒┬м┬а ┬д┬е├в┬а┬л┬и ┬в ├в┬о├з┬к┬а├е }
+  Smoothness: real;                      { ┬к┬о├н├д├д┬и├ж┬и┬е┬н├в ┬п┬л┬а┬в┬н┬о├б├в┬и ┬п┬е├а┬е┬м┬е├й┬е┬н┬и├п }
 
                              { not used }
   CycleTime: longint;                               { total cycle time, dsec }
@@ -51,12 +51,12 @@ var
   StopAfterPreMoving: longint;{ pause time after moving of empty robot, dsec }
   StopAfterMovingWithDetail: longint; { pause time after moving with detail, dsce}
 
-procedure DrawDiagram(P_tmp: byte);            { чертит  столбик-диаграмму и }
-  var i, X_Pos: word;                                 { выводит  название  операции }
+procedure DrawDiagram(P_tmp: byte);            { ├з┬е├а├в┬и├в  ├б├в┬о┬л┬б┬и┬к-┬д┬и┬а┬г├а┬а┬м┬м├г ┬и }
+  var i, X_Pos: word;                                 { ┬в├л┬в┬о┬д┬и├в  ┬н┬а┬з┬в┬а┬н┬и┬е  ┬о┬п┬е├а┬а├ж┬и┬и }
   begin
   NR:=GetRobot(P_tmp, 0); D_tmp:=P[P_tmp].ContDet;
   X_Pos:=RR*(P_tmp-1)+RR1 div 2;
-{--------------------------- столбик-диаграмма ------------------------------}
+{--------------------------- ├б├в┬о┬л┬б┬и┬к-┬д┬и┬а┬г├а┬а┬м┬м┬а ------------------------------}
   With PositionImage[P_tmp], P[P_tmp], RobotImage[NR] do
     begin
     Yt:=0;
@@ -66,7 +66,7 @@ procedure DrawDiagram(P_tmp: byte);            { чертит  столбик-диаграмму и }
     With D[D_tmp].Oper do i:=YY+150-Round(MinDuration*100/MaxDuration);
     Line(X_Pos-6,i,X_Pos+6,i);
     U1:=true;
-{------ название операции для позиций, поддерживающих более 1 операции ------}
+{------ ┬н┬а┬з┬в┬а┬н┬и┬е ┬о┬п┬е├а┬а├ж┬и┬и ┬д┬л├п ┬п┬о┬з┬и├ж┬и┬й, ┬п┬о┬д┬д┬е├а┬ж┬и┬в┬а├о├й┬и├е ┬б┬о┬л┬е┬е 1 ┬о┬п┬е├а┬а├ж┬и┬и ------}
     If NumberOfOp>1 then
       begin         
       SetFillStyle(1,0); Bar(X_Pos-8, 10, X_Pos, YY-45-YP);
@@ -77,7 +77,7 @@ procedure DrawDiagram(P_tmp: byte);            { чертит  столбик-диаграмму и }
     end;
   end;
 
-procedure Pokaz(NR: byte);                { показывает робот в текущем месте }
+procedure Pokaz(NR: byte);                { ┬п┬о┬к┬а┬з├л┬в┬а┬е├в ├а┬о┬б┬о├в ┬в ├в┬е┬к├г├й┬е┬м ┬м┬е├б├в┬е }
   begin
   With RobotImage[NR] do
     begin
@@ -93,7 +93,7 @@ procedure Pokaz(NR: byte);                { показывает робот в текущем месте }
     end;
  end;
 
-procedure DvigLev(NR: byte);  { смещение изображения робота на 1 точку влево }
+procedure DvigLev(NR: byte);  { ├б┬м┬е├й┬е┬н┬и┬е ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и├п ├а┬о┬б┬о├в┬а ┬н┬а 1 ├в┬о├з┬к├г ┬в┬л┬е┬в┬о }
   begin
   With RobotImage[NR] do
     begin
@@ -110,7 +110,7 @@ procedure DvigLev(NR: byte);  { смещение изображения робота на 1 точку влево }
     end;
   end;
 
-procedure DvigPr(NR: byte);  { смещение изображения робота на 1 точку вправо }
+procedure DvigPr(NR: byte);  { ├б┬м┬е├й┬е┬н┬и┬е ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и├п ├а┬о┬б┬о├в┬а ┬н┬а 1 ├в┬о├з┬к├г ┬в┬п├а┬а┬в┬о }
   begin
   With RobotImage[NR] do
     begin
@@ -127,7 +127,7 @@ procedure DvigPr(NR: byte);  { смещение изображения робота на 1 точку вправо }
     end;
   end;
 
-procedure Move(NR: byte; newXr: longint);{ передвижение робота на другое место }
+procedure Move(NR: byte; newXr: longint);{ ┬п┬е├а┬е┬д┬в┬и┬ж┬е┬н┬и┬е ├а┬о┬б┬о├в┬а ┬н┬а ┬д├а├г┬г┬о┬е ┬м┬е├б├в┬о }
   var
     S: real;
     i, s1: word;
@@ -144,7 +144,7 @@ procedure Move(NR: byte; newXr: longint);{ передвижение робота на другое место }
   end;
 
 procedure Init(NR: byte; newXr: longint; newY: byte);
-  var S: real;                                  { начальная установка робота }
+  var S: real;                                  { ┬н┬а├з┬а┬л├м┬н┬а├п ├г├б├в┬а┬н┬о┬в┬к┬а ├а┬о┬б┬о├в┬а }
   begin
   With RobotImage[NR] do
     begin
@@ -159,13 +159,13 @@ procedure Init(NR: byte; newXr: longint; newY: byte);
     end;
   end;
 (*
-function VipoLn(NR: byte);                            { выполнена ли команда }
+function VipoLn(NR: byte);                            { ┬в├л┬п┬о┬л┬н┬е┬н┬а ┬л┬и ┬к┬о┬м┬а┬н┬д┬а }
   begin
 ???With RobotImage[NR] do
      if Tk=0 then VipoLn:=Time*10=0 else VipoLn:=Time*10>=Tk
   end;
 *)
-procedure Vniz(NR: byte);            { перемещение робота на одну точку вниз }
+procedure Vniz(NR: byte);            { ┬п┬е├а┬е┬м┬е├й┬е┬н┬и┬е ├а┬о┬б┬о├в┬а ┬н┬а ┬о┬д┬н├г ├в┬о├з┬к├г ┬в┬н┬и┬з }
   begin
   With RobotImage[NR] do
     begin
@@ -183,7 +183,7 @@ procedure Vniz(NR: byte);            { перемещение робота на одну точку вниз }
     end;
   end;
 
-procedure Otp(NR: byte);                                 { отпускание детали }
+procedure Otp(NR: byte);                                 { ┬о├в┬п├г├б┬к┬а┬н┬и┬е ┬д┬е├в┬а┬л┬и }
   var i: word;
   begin
   With RobotImage[NR] do
@@ -195,7 +195,7 @@ procedure Otp(NR: byte);                                 { отпускание детали }
     end;
   end;
 
-procedure Vverh(NR: byte);          { перемещение робота на одну точку вверх }
+procedure Vverh(NR: byte);          { ┬п┬е├а┬е┬м┬е├й┬е┬н┬и┬е ├а┬о┬б┬о├в┬а ┬н┬а ┬о┬д┬н├г ├в┬о├з┬к├г ┬в┬в┬е├а├е }
   var i: byte;
   begin
   With RobotImage[NR] do
@@ -213,7 +213,7 @@ procedure Vverh(NR: byte);          { перемещение робота на одну точку вверх }
     end;
   end;
 
-procedure Zahv(NR: byte);                                    { захват детали }
+procedure Zahv(NR: byte);                                    { ┬з┬а├е┬в┬а├в ┬д┬е├в┬а┬л┬и }
   begin
   With RobotImage[NR] do
     begin
@@ -232,38 +232,38 @@ procedure Zahv(NR: byte);                                    { захват детали }
              SetColor(14);
              OutTextXY(X-15,0,'+'+St);
            end;
-        { недообработка не предполагается }
+        { ┬н┬е┬д┬о┬о┬б├а┬а┬б┬о├в┬к┬а ┬н┬е ┬п├а┬е┬д┬п┬о┬л┬а┬г┬а┬е├в├б├п }
       end;
     Bar(X-6,YY+3*RR1 div 2,X+6,YY+150);
     end;
   end;
 
 
-procedure Korr(NR: byte);           { корректировка  текущей Х-координаты -- }
-  begin                             { робот выставляется строго над позицией }
+procedure Korr(NR: byte);           { ┬к┬о├а├а┬е┬к├в┬и├а┬о┬в┬к┬а  ├в┬е┬к├г├й┬е┬й тАв-┬к┬о┬о├а┬д┬и┬н┬а├в├л -- }
+  begin                             { ├а┬о┬б┬о├в ┬в├л├б├в┬а┬в┬л├п┬е├в├б├п ├б├в├а┬о┬г┬о ┬н┬а┬д ┬п┬о┬з┬и├ж┬и┬е┬й }
     Move(NR, Round(P[R[NR].DestP].Coord*1000));
     RobotImage[NR].Corrected:=TRUE;
   end;
 
-procedure Deistvie(NR: byte);        { выполнение текущей команды за 0.1 сек }
+procedure Deistvie(NR: byte);        { ┬в├л┬п┬о┬л┬н┬е┬н┬и┬е ├в┬е┬к├г├й┬е┬й ┬к┬о┬м┬а┬н┬д├л ┬з┬а 0.1 ├б┬е┬к }
   begin
   With RobotImage[NR], R[NR] do
     begin
     Case ReflectedEl of
       2,6:
          If Not RobotImage[NR].Corrected then Korr(NR);
-      7: begin                          { опускание на 1 точку вниз с грузом }
+      7: begin                          { ┬о┬п├г├б┬к┬а┬н┬и┬е ┬н┬а 1 ├в┬о├з┬к├г ┬в┬н┬и┬з ├б ┬г├а├г┬з┬о┬м }
            Vniz(NR);
            If Element=0 then Otp(NR);
          end;
-      3: begin                           { поднятие на 1 точку вниз с грузом }
+      3: begin                           { ┬п┬о┬д┬н├п├в┬и┬е ┬н┬а 1 ├в┬о├з┬к├г ┬в┬н┬и┬з ├б ┬г├а├г┬з┬о┬м }
            Vverh(NR);
            If Element=4 then Zahv(NR);
          end;
       1,5:
          begin
-         If HorDir=1 then Move(NR, Round(Xr+RobotHorSpeed*100))   { вправо }
-                     else Move(NR, Round(Xr-RobotHorSpeed*100));  { влево  }
+         If HorDir=1 then Move(NR, Round(Xr+RobotHorSpeed*100))   { ┬в┬п├а┬а┬в┬о }
+                     else Move(NR, Round(Xr-RobotHorSpeed*100));  { ┬в┬л┬е┬в┬о  }
          robotimage[nr].corrected:=FALSE;
          end;
     end;
@@ -276,28 +276,28 @@ procedure InitScreen;
     X: word;
     PrevOpName: string;
   begin
-{-----------Необходимые условия использования графической трассировки--------}
+{-----------┬Н┬е┬о┬б├е┬о┬д┬и┬м├л┬е ├г├б┬л┬о┬в┬и├п ┬и├б┬п┬о┬л├м┬з┬о┬в┬а┬н┬и├п ┬г├а┬а├д┬и├з┬е├б┬к┬о┬й ├в├а┬а├б├б┬и├а┬о┬в┬к┬и--------}
   Animation:=TRUE;
   If AutoTimeRegime then
     begin AutoTimeRegime:=FALSE; TimeScale:=1; DelayTime:=40; end;
-{--------------------------вычисление констант-------------------------------}
+{--------------------------┬в├л├з┬и├б┬л┬е┬н┬и┬е ┬к┬о┬н├б├в┬а┬н├в-------------------------------}
   LowerLiftTime:=10*VertTravelTime;
   YP:=LowerLiftTime div 5;
   RR:=640 div NumberOfPositions;
   RR1:=(RR div 3)*2;
   Smoothness:=0.1;
-{ Write ('Темп ускорения времени: '); ReadLn(Temp); Temp:=10; }
-{----------------------- инициализация инфо о ваннах ------------------------}
+{ Write ('тАЩ┬е┬м┬п ├г├б┬к┬о├а┬е┬н┬и├п ┬в├а┬е┬м┬е┬н┬и: '); ReadLn(Temp); Temp:=10; }
+{----------------------- ┬и┬н┬и├ж┬и┬а┬л┬и┬з┬а├ж┬и├п ┬и┬н├д┬о ┬о ┬в┬а┬н┬н┬а├е ------------------------}
   For i:=1 to NumberOfPositions do with PositionImage[i] do
     begin
     Yt:=0;
     U1:=FALSE;
     end;
-{----------------------- инициализация графики ------------------------------}
+{----------------------- ┬и┬н┬и├ж┬и┬а┬л┬и┬з┬а├ж┬и├п ┬г├а┬а├д┬и┬к┬и ------------------------------}
   GraphicDriver := Detect;
   InitGraph(GraphicDriver, GraphicMode, '');
 { case when "egavga.bgi" is not found }
-{ ---------------- изображение ванн и названий операций ---------------------}
+{ ---------------- ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и┬е ┬в┬а┬н┬н ┬и ┬н┬а┬з┬в┬а┬н┬и┬й ┬о┬п┬е├а┬а├ж┬и┬й ---------------------}
   X:=0;
   For i:=1 to NumberOfPositions do
     begin
@@ -316,10 +316,10 @@ procedure InitScreen;
     OutTextXY(X,YY-70,St);
     X:=X+RR
     end;
-{ ---------------- изображение подвески автооператоров ----------------------}
+{ ---------------- ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и┬е ┬п┬о┬д┬в┬е├б┬к┬и ┬а┬в├в┬о┬о┬п┬е├а┬а├в┬о├а┬о┬в ----------------------}
   SetFillStyle(1,7);
   Bar(0,YY-27-YP,640,YY-30-YP);
-{    ---------------- изображение содержимого ванн --------------------------}
+{    ---------------- ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и┬е ├б┬о┬д┬е├а┬ж┬и┬м┬о┬г┬о ┬в┬а┬н┬н --------------------------}
   X:=0;
   For i:=1 to NumberOfPositions do
     begin
@@ -332,17 +332,17 @@ procedure InitScreen;
       end;
     X:=X+RR;
     end;
-{ ----------- вывод инфо о текущем и полном временах процесса ---------------}
+{ ----------- ┬в├л┬в┬о┬д ┬и┬н├д┬о ┬о ├в┬е┬к├г├й┬е┬м ┬и ┬п┬о┬л┬н┬о┬м ┬в├а┬е┬м┬е┬н┬а├е ┬п├а┬о├ж┬е├б├б┬а ---------------}
   SetColor(2);
-  OutTextXY(10,457,'С НАЧАЛА ЦИКЛА ПРОШЛО       СЕКУНД');
+  OutTextXY(10,457,'тАШ ┬НтВмтАФтВмтА╣тВм тАУ╦Ж┼атА╣тВм ┬П┬Р┼╜╦ЬтА╣┼╜       тАШтАж┼атАЬ┬НтАЮ');
 { Str(Round(CycleTime/10):4,St);
-  OutTextXY(350,457,'Время полного цикла '+St+' секунд.');}
-{        ---------------- изображение роботов -------------------------------}
-  For NR:=1 to NumberOfRobots do       { ставим робота над исходной позицией }
-    Init(NR, Round(R[NR].HorCoord)*1000, YP);{  в опущенном положении        }
+  OutTextXY(350,457,'тАЪ├а┬е┬м├п ┬п┬о┬л┬н┬о┬г┬о ├ж┬и┬к┬л┬а '+St+' ├б┬е┬к├г┬н┬д.');}
+{        ---------------- ┬и┬з┬о┬б├а┬а┬ж┬е┬н┬и┬е ├а┬о┬б┬о├в┬о┬в -------------------------------}
+  For NR:=1 to NumberOfRobots do       { ├б├в┬а┬в┬и┬м ├а┬о┬б┬о├в┬а ┬н┬а┬д ┬и├б├е┬о┬д┬н┬о┬й ┬п┬о┬з┬и├ж┬и┬е┬й }
+    Init(NR, Round(R[NR].HorCoord)*1000, YP);{  ┬в ┬о┬п├г├й┬е┬н┬н┬о┬м ┬п┬о┬л┬о┬ж┬е┬н┬и┬и        }
   end;
 
-procedure LoadDetail;     { работа робокара, обслуживающего позицию загрузки }
+procedure LoadDetail;     { ├а┬а┬б┬о├в┬а ├а┬о┬б┬о┬к┬а├а┬а, ┬о┬б├б┬л├г┬ж┬и┬в┬а├о├й┬е┬г┬о ┬п┬о┬з┬и├ж┬и├о ┬з┬а┬г├а├г┬з┬к┬и }
  var X: word;
  begin
  If (P[LoadPosition].ContDet<>0) AND Not PositionImage[LoadPosition].U1 then
@@ -354,7 +354,7 @@ procedure LoadDetail;     { работа робокара, обслуживающего позицию загрузки }
    end;
  end;
 
-procedure UnLoadDetail;   { работа робокара, обслуживающего позицию выгрузки }
+procedure UnLoadDetail;   { ├а┬а┬б┬о├в┬а ├а┬о┬б┬о┬к┬а├а┬а, ┬о┬б├б┬л├г┬ж┬и┬в┬а├о├й┬е┬г┬о ┬п┬о┬з┬и├ж┬и├о ┬в├л┬г├а├г┬з┬к┬и }
   var X: word;
   begin
   If (P[UnLoadPosition].ContDet=0) AND PositionImage[UnLoadPosition].U1 then
@@ -367,11 +367,11 @@ procedure UnLoadDetail;   { работа робокара, обслуживающего позицию выгрузки }
   end;
 
 procedure Trace(imp: boolean);
-  const Ending: string[10]=' АЫЫЫ     ';
+  const Ending: string[10]=' тВмтА║тА║тА║     ';
   var
     i: byte;
-    X: word;                { абсцисса столбика индикации         }
-    Ytn: longint;           { размер столбика индикации           }
+    X: word;                { ┬а┬б├б├ж┬и├б├б┬а ├б├в┬о┬л┬б┬и┬к┬а ┬и┬н┬д┬и┬к┬а├ж┬и┬и         }
+    Ytn: longint;           { ├а┬а┬з┬м┬е├а ├б├в┬о┬л┬б┬и┬к┬а ┬и┬н┬д┬и┬к┬а├ж┬и┬и           }
     busyRT: longint;
   begin
   LoadDetail; UnloadDetail;
@@ -385,19 +385,19 @@ procedure Trace(imp: boolean);
       Delay(Round((DelayTime-DelayTimeMin)*Smoothness));
     end;
   For NR:=1 to NumberOfRobots do RobotImage[NR].ReflectedEl:=R[NR].Element;
-{ ----------------------------- вывод времени -------------------------------}
+{ ----------------------------- ┬в├л┬в┬о┬д ┬в├а┬е┬м┬е┬н┬и -------------------------------}
   SetFillStyle(1,0);
   Bar(187,457,220,465);
   SetColor(2);
   Str(Time:1, St); OutTextXY(187,457,St);
   Bar(283,457,291,465); OutTextXY(283,457,Ending[ord(St[Length(St)])-47]);
-{----------------- столбики продолжительностей процессов --------------------}
+{----------------- ├б├в┬о┬л┬б┬и┬к┬и ┬п├а┬о┬д┬о┬л┬ж┬и├в┬е┬л├м┬н┬о├б├в┬е┬й ┬п├а┬о├ж┬е├б├б┬о┬в --------------------}
   For i:=1 to NumberOfPositions do
     with PositionImage[i] do if U1 then
       begin
         Section(i, busyRT);
         D_tmp:=P[i].ContDet;
-        If D_tmp<>0 then{деталь может быть вынута в GCCtrl, GCTrace отстает от нее}
+        If D_tmp<>0 then{┬д┬е├в┬а┬л├м ┬м┬о┬ж┬е├в ┬б├л├в├м ┬в├л┬н├г├в┬а ┬в GCCtrl, GCTrace ┬о├в├б├в┬а┬е├в ┬о├в ┬н┬е┬е}
           begin
           Ytn:=Round((D[D_tmp].Oper.MinDuration-busyRT)*100/D[D_tmp].Oper.MaxDuration);
           If Ytn<>Yt then
