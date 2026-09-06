@@ -1,6 +1,6 @@
-(* ���ࠡ�⪠ �����⬮� �ࠢ����� �࠭ᯮ�⭮� ��⥬�� ��� ����- *)
-(* ���������⨩ � �ᯮ�짮������  ��⮤�� ���樮����� �ࠢ�����. *)
-(* �뢮� १���⮢ *)
+(* Разработка алгоритмов управления транспортной системой РТК галь- *)
+(* ванопокрытий с использованием  методов ситуационного управления. *)
+(* Вывод результатов *)
 
 {$M $4000,0,20000}
 Program GCOutput;
@@ -23,12 +23,12 @@ Uses
       NumberOfLines:=1;
       While Not Eof(f) do begin inc(NumberOfLines); ReadLn(f); end;
       Close(f);
-      FastCenter('����� �ᯨᠭ��: '+Copy(JustFileName(FN),8,1), 3, $1F);
+      FastCenter('®¬¥à à á¯¨á ­¨ï: '+Copy(JustFileName(FN),8,1), 3, $1F);
       Window(22,10,59,16);
       TextAttr:=$70; ClrScr;
-      SetFrameChars('�', '�', '�', '�', '�', '�');
-      FrameWindow(23,10,58,16, $70, $70, ' �ᯮ������ ');
-      FastWriteWindow(CharStr('�', 30), 4, 5, $70);
+      SetFrameChars('º', 'Í', '¼', '»', 'È', 'É');
+      FrameWindow(23,10,58,16, $70, $70, ' ˆá¯®«­¥­¨¥ ');
+      FastWriteWindow(CharStr('°', 30), 4, 5, $70);
       HiddenCursor;
       Reset(f);
       NumberOfPaintedBoxes1:=0;
@@ -38,7 +38,7 @@ Uses
         If NumberOfPaintedBoxes<>NumberOfPaintedBoxes1 then
           begin
           NumberOfPaintedBoxes1:=NumberOfPaintedBoxes;
-          FastWriteWindow(CharStr('�', NumberOfPaintedBoxes), 4, 5, $70);
+          FastWriteWindow(CharStr('Û', NumberOfPaintedBoxes), 4, 5, $70);
           end;
         ReadLn(f,s); {WriteLn(lst, s);}
         end;
@@ -46,13 +46,13 @@ Uses
     end;
 
   begin
-    WriteLn ('��ᯨᠭ�� ࠡ��� �࠭ᯮ�⭮� ��⥬� ��� ���좠�������⨩',
-            #10, #13, '�뢮� १���⮢',
-            #10, #13, '���㥢 �., ����, ����, 1992, 93');
+    WriteLn (' á¯¨á ­¨¥ à ¡®âë âà ­á¯®àâ­®© á¨áâ¥¬ë ’Š £ «ì¢ ­®¯®ªàëâ¨©',
+            #10, #13, '‚ë¢®¤ à¥§ã«ìâ â®¢',
+            #10, #13, 'Œ¥¦ã¥¢ €., ‘€, ’ˆ•Œ, 1992, 93');
     SaveWindow(1,2,80,25,TRUE,SC0); C:=TextAttr;
     Repeat
       TextAttr:=$1F; ClrScr;
-      FastWrite('                                �뢮� १���⮢                               ',1,1,$4F);
+      FastWrite('                                ‚ë¢®¤ à¥§ã«ìâ â®¢                               ',1,1,$4F);
       GetFileName('program?.dat',$20, 25, 10, 22, 2, Colors, FN);
       If FN<>'' then PrintFile (FN);
     Until FN='';
