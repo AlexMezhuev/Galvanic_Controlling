@@ -13,17 +13,17 @@ Unit GCTrace;
       If Animation then
         begin
         TextBackGround (Black); ClrScr;
-        FastWrite ('Оптимизируемая функция: ', 9, 1, LightGray);
-        FastWrite ('    Файл                  Анимация                   Время             Опции    ',
+        FastWrite ('┼╜┬п├в┬и┬м┬и┬з┬и├а├г┬е┬м┬а├п ├д├г┬н┬к├ж┬и├п: ', 9, 1, LightGray);
+        FastWrite ('    тАЭ┬а┬й┬л                  тВм┬н┬и┬м┬а├ж┬и├п                   тАЪ├а┬е┬м├п             ┼╜┬п├ж┬и┬и    ',
                    1, 1, $70);
         Window (64, 2, 80, 25); TextAttr:=$1F; ClrScr;
-        GoToXY(1, 2); Write('Цикл:',CRLF,'Время:',CRLF,'Масштаб:');
+        GoToXY(1, 2); Write('тАУ┬и┬к┬л:',CRLF,'тАЪ├а┬е┬м├п:',CRLF,'┼Т┬а├б├и├в┬а┬б:');
         Window(1, 19, 80, 25); TextBackGround (Green); ClrScr;
         end
                    else
         begin
         Window(1,1,80,25); TextAttr:=7; ClrScr;
-        Write ('Время:', CRLF, 'Масштаб:', CRLF, 'Оптимизируемая функция: ');
+        Write ('тАЪ├а┬е┬м├п:', CRLF, '┼Т┬а├б├и├в┬а┬б:', CRLF, '┼╜┬п├в┬и┬м┬и┬з┬и├а├г┬е┬м┬а├п ├д├г┬н┬к├ж┬и├п: ');
         end;
     end;
 
@@ -49,13 +49,13 @@ Unit GCTrace;
       var i: integer;
       begin
         Window(1, SA[State].Y+1, 10, 25);
-        Write ('Номер', CRLF, 'Дет(Вм.)', CRLF, 'Cост.', CRLF, 'Ост. вр.');
+        Write ('┬Н┬о┬м┬е├а', CRLF, 'тАЮ┬е├в(тАЪ┬м.)', CRLF, 'C┬о├б├в.', CRLF, '┼╜├б├в. ┬в├а.');
         i:=P0-1; tmp:=3;
         Repeat
           Repeat inc (i) until P[i].Value<>0; tmp:=tmp+8;
           Window(tmp, SA[State].Y+1, tmp+8, 25);
           WriteLn (i:4, CRLF, P[i].Fillness:3, '(', P[i].Value, ') ');
-          If Section(i,busyRT)=free then WriteLn(' своб.') else WriteLn(' занят');
+          If Section(i,busyRT)=free then WriteLn(' ├б┬в┬о┬б.') else WriteLn(' ┬з┬а┬н├п├в');
           Write (busyRT:5);
         until (tmp>59) OR (i=NumberOfPositions);
         If i=NumberOfPositions then
@@ -66,20 +66,20 @@ Unit GCTrace;
       var i: integer;
       begin
         Window(1, SA[State].Y+1, 9, 25);
-        Write ('Номер', CRLF, 'Сост.', CRLF, 'Позиция',
-                CRLF, 'Время', CRLF, 'Регл.', CRLF, 'Наруш.');
+        Write ('┬Н┬о┬м┬е├а', CRLF, 'тАШ┬о├б├в.', CRLF, '┬П┬о┬з┬и├ж┬и├п',
+                CRLF, 'тАЪ├а┬е┬м├п', CRLF, '┬Р┬е┬г┬л.', CRLF, '┬Н┬а├а├г├и.');
         For i:=1 to NumberOfDetails do
         begin
           Window(1+i*10, SA[State].Y+1, (i+1)*10, 25);
           WriteLn (i:5);
           tmp:=ord(Detail(i, timeD));
           Case  tmp of
-            1: Write ('  Не обр.', ' ':30);
-            2: Write (' Обрабат.');
-            3: Write (' Обработ.');
-            4: FastWriteWindow(' Критич. ', WhereY, WhereX, $24);
-            5: Write (' Заверш. ', ' ':30);
-            6: Write (' Перенос. ',  Op[i, D[i].Stage].Pos:4, '->',
+            1: Write ('  ┬Н┬е ┬о┬б├а.', ' ':30);
+            2: Write (' ┼╜┬б├а┬а┬б┬а├в.');
+            3: Write (' ┼╜┬б├а┬а┬б┬о├в.');
+            4: FastWriteWindow(' ┼а├а┬и├в┬и├з. ', WhereY, WhereX, $24);
+            5: Write (' тАб┬а┬в┬е├а├и. ', ' ':30);
+            6: Write (' ┬П┬е├а┬е┬н┬о├б. ',  Op[i, D[i].Stage].Pos:4, '->',
                Op[i, D[i].Stage+1].Pos:1, ' ':21);
           end;
           WriteLn;
@@ -96,16 +96,16 @@ Unit GCTrace;
       var i: integer;
       begin
         Window(1, SA[State].Y+1, 11, 25);
-        Write ('Номер', CRLF, 'Кооpд.', CRLF, 'Назнач.',
-                CRLF, 'Тpавеpса', CRLF, 'Нагрузка');
+        Write ('┬Н┬о┬м┬е├а', CRLF, '┼а┬о┬оp┬д.', CRLF, '┬Н┬а┬з┬н┬а├з.',
+                CRLF, 'тАЩp┬а┬в┬еp├б┬а', CRLF, '┬Н┬а┬г├а├г┬з┬к┬а');
         For i:=1 to NumberOfRobots do
           with R[i] do
             begin
             Window(3+i*9, SA[State].Y+1, 3+(i+1)*9, 25);
             WriteLn (i:5, CRLF, RobotCoordInPos(i,delta):5);
             If HorDir=0 then WriteLn ('-':5) else WriteLn (DestP:5);
-            If VertCoord=-1 then WriteLn (' опущена') else WriteLn(' поднята');
-            If WithLoad then Write ('  есть') else Write ('   нет');
+            If VertCoord=-1 then WriteLn (' ┬о┬п├г├й┬е┬н┬а') else WriteLn(' ┬п┬о┬д┬н├п├в┬а');
+            If WithLoad then Write ('  ┬е├б├в├м') else Write ('   ┬н┬е├в');
             end;
       end;
 
@@ -122,7 +122,7 @@ Unit GCTrace;
           For i:=1 to NumberOfPositions do
             begin
               For j:=1 to P[i].Value do
-                begin FastWriteWindow('█', 5, 2*NRB+1, White); inc(NRB); end;
+                begin FastWriteWindow('├Ы', 5, 2*NRB+1, White); inc(NRB); end;
               if i mod 2=0 then begin GoToXY(2*i+1,6); Write(i:1); end;
             end;
           GoToXY(1,3); ClrEol;
@@ -131,7 +131,7 @@ Unit GCTrace;
           For i:=1  to NumberOfDetails do
             if Detail(i,timeD)=Critical then
               FastWriteWindow
-                ('█', 5, D[i].Oper.Pos*2+1, LightRed+Blink);
+                ('├Ы', 5, D[i].Oper.Pos*2+1, LightRed+Blink);
           TextAttr:=$20;
           Case State of
             1: TraceSections;
