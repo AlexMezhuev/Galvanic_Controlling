@@ -46,7 +46,7 @@ int_i,N: longint;
   begin       flag:=false;
 {???}
     ClrScr;
-{   Write ('®¬¥à â¥å­®«®£¨ç¥áª®£® ¯à®æ¥áá ? '); ReadLn (Process);} Process:='1';
+{   Write ('Номер технологического процесса? '); ReadLn (Process);} Process:='1
     FN:='shedule'+Process+'.dat';
     D:=0;
     Assign(f, FN); Reset(f);
