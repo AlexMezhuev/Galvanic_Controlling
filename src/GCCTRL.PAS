@@ -111,15 +111,15 @@ Unit GCCtrl;
     begin                    { Unobjective method }
 {exit;}
       If NumberOfRobots=1 then Exit;
-   { ¢ëç¨á«¥­¨¥ ¯®«®¦¥­¨© â¥áâ¨àã¥¬®£® à®¡®â  ¤® ¢ë¯®«­¥­¨ï è £  ¨ ¯®á«¥ }
+      { вычисление положений тестируемого робота до выполнения шага и после }
       II2:=0; CRi:=0; x1:=R[NR].HorCoord-TimeQuantum*RobotHorSpeed*R[NR].HorDir;
       If R[NR].HorCoord*R[NR].HorDir>=P[R[NR].DestP].Coord*R[NR].HorDir
         then x2:=P[R[NR].DestP].Coord else x2:=R[NR].HorCoord;
       If x1>x2 then begin x:=x1; x1:=x2; x2:=x; end;
       For i:=1 to NumberOfRobots do
         if i<>NR then
-{  ­ «¨§ áâ®«ª­®¢¥­¨ï, § ¯®¬¨­ ­¨¥ à®¡®â  ¨ ¢ëç¨á«¥­¨¥ áã¬¬ à­®£® ¨­¤¥ªá  ¢ ¦-
-­®áâ¥© à®¡®â®¢ }
+{ анализ столкновения, запоминание робота и вычисление суммарного индекса важ-
+ностей роботов }
           if (R[i].HorCoord>=x1-RobotWidth) AND (R[i].HorCoord<=x2+RobotWidth) then
             begin
             inc(CRi); CollisedRobots[CRi]:=i;
@@ -127,7 +127,7 @@ Unit GCCtrl;
             end;
       If CRi=0 then Exit;
       If ord(Detail(CC[NR].Det, timeD))<=II2 then
-        begin                   { à®¡®â NR ¬¥­¥¥ ¢ ¦¥­ }
+        begin                   { робот NR менее важен }
         Extr_HorCoord:=R[CollisedRobots[1]].HorCoord*R[NR].HorDir;
         For i:=2 to CRi do
           if R[CollisedRobots[i]].HorCoord*R[NR].HorDir<Extr_HorCoord then
@@ -139,21 +139,21 @@ TraceProgram(2, NR, 'K', Time-R[NR].SSTime, RobotCoordInPos(NR,x),D_tmp);
 R[NR].SSTime:=Time;
         end
                                          else
-        For i:=1 to CRi do { à®¡®â NR ¡®«¥¥ ¢ ¦¥­--®â¢®¤ïâáï ®áâ «ì­ë¥ à®¡®âë }
+        For i:=1 to CRi do { робот NR более важен--отводятся остальные роботы }
           begin
           j:=CollisedRobots[i];
           x:=R[j].HorCoord;
           R[j].HorCoord:=
             R[j].HorCoord+TimeQuantum*RobotHorSpeed*R[NR].HorDir;
           If (R[j].HorCoord>=x1-RobotWidth) AND (R[j].HorCoord<=x2+RobotWidth) then
-            begin FastWrite('‘â®«ª­®¢¥­¨¥ à®¡®â®¢',1,1,$4E); {Halt;} end;
+            begin FastWrite('Столкновение роботов',1,1,$4E); {Halt;} end;
 If Not R[i].Busy then D_tmp:=0;
 TraceProgram(2, i, 'K', Time-R[i].SSTime, RobotCoordInPos(i,x),D_tmp);
 R[i].SSTime:=Time;
           end;
     end;
-{ Ž¯à¥¤¥«¥­¨¥ áâ®«ª­®¢¥­¨ï à®¡®â®¢ ¨ ä®à¬¨à®¢ ­¨¥ ¯à¨ª §  ­  ¯¥à¥¬¥é¥­¨¥ à®¡®-
-â®¢ }
+{ Определение столкновения роботов и формирование приказа на перемещение робо-
+тов }
 
   Procedure RobotStep;
     var
