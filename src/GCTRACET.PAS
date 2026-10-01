@@ -8,24 +8,25 @@ Unit GCTrace;
 
   implementation
 
-  Procedure InitScreen(Animation: boolean);
+   Procedure InitScreen(Animation: boolean);
     begin
       If Animation then
         begin
         TextBackGround (Black); ClrScr;
-        FastWrite ('Ž¯â¨¬¨§¨àã¥¬ ï äã­ªæ¨ï: ', 9, 1, LightGray);
-        FastWrite ('    ” ©«                  €­¨¬ æ¨ï                   ‚à¥¬ï             Ž¯æ¨¨    ',
+        FastWrite ('Оптимизируемая функция: ', 9, 1, LightGray);
+        FastWrite ('    Файл                  Анимация                   Время             Опции    ',
                    1, 1, $70);
         Window (64, 2, 80, 25); TextAttr:=$1F; ClrScr;
-        GoToXY(1, 2); Write('–¨ª«:',CRLF,'‚à¥¬ï:',CRLF,'Œ áèâ ¡:');
+        GoToXY(1, 2); Write('Цикл:',CRLF,'Время:',CRLF,'Масштаб:');
         Window(1, 19, 80, 25); TextBackGround (Green); ClrScr;
         end
                    else
         begin
         Window(1,1,80,25); TextAttr:=7; ClrScr;
-        Write ('‚à¥¬ï:', CRLF, 'Œ áèâ ¡:', CRLF, 'Ž¯â¨¬¨§¨àã¥¬ ï äã­ªæ¨ï: ');
+        Write ('Время:', CRLF, 'Масштаб:', CRLF, 'Оптимизируемая функция: ');
         end;
     end;
+
 
   Procedure TraceWhenNotAnimation;
     begin
