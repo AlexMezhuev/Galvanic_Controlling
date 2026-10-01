@@ -15,18 +15,18 @@ Unit GC_IF; {Initial-Terminative Unit}
       i, j: integer;
       x, y: real;
     begin
-{-------------------- ¥à¢®­ ç «ì­ ï ®¡à ¡®âª  íªà ­  -----------------------}
-      WriteLn (' á¯¨á ­¨¥ à ¡®âë âà ­á¯®àâ­®© á¨áâ¥¬ë ’Š £ «ì¢ ­®¯®ªàëâ¨©',
-               CRLF, ' áç¥â à á¯¨á ­¨ï',
-               CRLF, 'Œ¥¦ã¥¢ €., ‘€, ’ƒ’“, 1992,94');
+{-------------------- Первоначальная обработка экрана -----------------------}
+      WriteLn ('Расписание работы транспортной системы РТК гальванопокрытий',
+               CRLF, 'Расчет расписания',
+               CRLF, 'Межуев А., САПР, ТГТУ, 1992,94');
       SaveWindow(1,1,80,25,TRUE,StartScreen); StartColor:=TextAttr;
       Process:='2';
       If ParamCount<>0 then Process:=ParamStr(1);
-{     Write ('®¬¥à â¥å­®«®£¨ç¥áª®£® ¯à®æ¥áá ? '); ReadLn (Process);} 
+{     Write ('Номер технологического процесса? '); ReadLn (Process);}
       s:='shedule'+Process+'.dat';
       Assign (f_set, 'gcset.dat'); Reset (f_set);
       Read (f_set, i); Animation:=i=1;
-{-------------------------- ‚¢®¤ ¤ ­­ëå ®¡  ¢â®®¯¥à â®à å -------------------}
+{-------------------------- Ввод данных об автооператорах -------------------}
       Assign (f, 'autoop.dat'); ReSet (f);
       ReadLn (f, NumberOfRobots); ReadLn (f, x); ReadLn (f, y);
       RobotHorSpeed:=x/60; RobotVertSpeed:=y/60;
